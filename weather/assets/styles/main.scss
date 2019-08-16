@@ -1,0 +1,52 @@
+//@import '~bulma/sass/utilities/initial-variables';
+//@import '~bulma/sass/utilities/functions';
+@import 'bulma/sass/utilities/_all.sass';
+
+
+//$navbar-background-color: $warning;
+//$navbar-background-color: $dark;
+//$navbar-item-color:$white;
+$navbar-height:4rem;
+//$navbar-item-hover-background-color:red;
+
+$dropdown-menu-min-width:100%;
+$navbar-box-shadow-size: 0 5px 0 0;
+
+.wrapper{
+  padding: calc(64px + 24px) 12px;
+  min-height: calc(100vh - 64px - 96px - 48px);
+}
+
+.button{
+  transition: .15s;
+}
+.button:hover{
+  box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.2);
+}
+
+
+.comp-enter-active{
+  transition: all .3s ease-out;
+}
+.comp-leave-active{
+  transition: all .0s;
+}
+.comp-leave{
+  display: none;
+}
+.comp-enter, .comp-leave-to{
+  opacity: 0;
+}
+
+
+
+.select-1{
+  margin: 5px 0;
+}
+
+//toggle button begin
+
+  // end-code toggle button
+
+@import "~bulma";
+//

@@ -1,0 +1,28 @@
+[{
+        "id": 519188,
+        "name": "Novinki",
+        "country": "RU",
+        "coord": {
+            "lon": 37.666668,
+            "lat": 55.683334
+        }
+    },
+    {
+        "id": 708546,
+        "name": "Holubynka",
+        "country": "UA",
+        "coord": {
+            "lon": 33.900002,
+            "lat": 44.599998
+        }
+    },
+    {
+        "id": 529334,
+        "name": "Mar’ina Roshcha",
+        "country": "RU",
+        "coord": {
+            "lon": 37.611111,
+            "lat": 55.796391
+        }
+    }
+]
