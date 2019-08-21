@@ -239,8 +239,11 @@
 
     },
 
-    computed: {
+    props: {
+      propsByForecast: String
+    },
 
+    computed: {
       isSelected() {
         for (let i in this.names) {
           if (this.selected_1 == this.names[i].id) {
@@ -254,19 +257,27 @@
         }
       }
     },
+
     methods: {
       unselect_selected_2() {
         this.selected_2 = ''
-        this.valid_temp_high ='-'
-        this.valid_temp_low ='-'
+        this.valid_temp_high = '-'
+        this.valid_temp_low = '-'
       },
       isSuccessMethod() {
         if (this.selected_2 !== '') {
           if (localStorage.getItem('fixation_temp') === null) {
             localStorage.setItem('fixation_temp', 0)
           }
+          let rail_temp = 0
+          if (typeof this.propsByForecast !== 'undefined') {
+            rail_temp = parseFloat(this.propsByForecast)
+            console.log('current_rail', rail_temp)
+          } else {
+            rail_temp = parseFloat((JSON.parse(localStorage.getItem('current_weather'))).main.rail)
+            console.log('standart_rail', rail_temp)
+          }
           let fixationTemp = parseFloat(localStorage.getItem('fixation_temp'))
-          let rail_temp = parseFloat((JSON.parse(localStorage.getItem('current_weather'))).main.rail)
           let temp_high = parseInt(this.selected_2[0].value)
           let temp_low = parseInt(this.selected_2[1].value)
           if (isNaN(temp_low)) {
@@ -304,7 +315,6 @@
     }
 
   }
-
 </script>
 
 <style>

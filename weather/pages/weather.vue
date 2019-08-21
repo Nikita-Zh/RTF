@@ -63,10 +63,10 @@
 
     </div>
     <modal v-if="showModal" @close="showModal = false">
-      <div slot="header">
-        <h1 class="title">Корректировка:</h1>
+      <div slot="header" class="modal-card-title">
+        <p>Корректировка:</p>
       </div>
-      <div slot="body">
+        <div slot="body">
         <label>Температура:</label>
         <input v-model="inputTemp" class="input " type="number" placeholder="Введите температуру">
         <label>Облачность:</label>
@@ -76,8 +76,7 @@
         <input v-model="inputWind" class="input " type="number" placeholder="Введите скорость ветра">
       </div>
       <div slot="footer">
-        <button class="button is-success  is-fullwidth"
-          @click="showModal = false, setChanges()"><b>Подтвердить</b></button>
+        <button class="button is-success is-fullwidth" @click="showModal = false, setChanges()">Подтвердить</button>
       </div>
     </modal>
   </div>
