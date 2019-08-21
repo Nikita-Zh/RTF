@@ -47,7 +47,7 @@
   .modal-mask {
     position: fixed;
     z-index: 19;
-    backdrop-filter: blur(5px);
+    backdrop-filter: blur(2px);
     top: 0;
     left: 0;
     width: 100%;
@@ -122,7 +122,7 @@
     float: right;
   }
 
-  .modal-enter {
+ /* .modal-enter {
     opacity: 0;
   }
 
@@ -134,6 +134,6 @@
   .modal-leave-active .modal-container {
     -webkit-transform: scale(1.1);
     transform: scale(1.1);
-  }
+  }*/
 
 </style>

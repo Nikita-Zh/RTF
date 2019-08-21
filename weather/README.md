@@ -1,4 +1,4 @@
-# RTF
+# weathercomponents
 
 > My flawless Nuxt.js project
 

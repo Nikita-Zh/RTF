@@ -1,16 +1,16 @@
 <template>
-    <div class="tile is-ancestor">
-      <div class="tile is-vertical is-parent">
-        <div class="tile is-child box">
-          <p class="title">Введите координаты:</p>
-          <input class="input input-geo" id="lat_" type="text" placeholder="Широта">
-          <input class="input input-geo" id="lon_" type="text" placeholder="Долгота">
-          <button id="button_geo" class="button is-primary is-medium is-fullwidth"
-            v-on:click="showWeaterByGeoCoordinates">Отправить</button>
-        </div>
-        <!-- <forecast ref="forecast"></forecast> -->
+  <div class="tile is-ancestor">
+    <div class="tile is-vertical is-parent">
+      <div class="tile is-child box">
+        <p class="title">Введите координаты:</p>
+        <input v-model="inputLat" class="input input-geo" id="lat_" type="text" placeholder="Широта">
+        <input v-model="inputLon" class="input input-geo" id="lon_" type="text" placeholder="Долгота">
+        <button :disabled="isDisabled" id="button_geo" class="button is-primary is-medium is-fullwidth"
+          v-on:click="showWeaterByGeoCoordinates">Отправить</button>
       </div>
+      <!-- <forecast ref="forecast"></forecast> -->
     </div>
+  </div>
 </template>
 
 <script>
@@ -20,7 +20,7 @@
   const appKey = "315c9f5b55e01a3815512c1958910fb7"
 
   export default {
-    components:{
+    components: {
       Forecast,
     },
     data() {
@@ -33,11 +33,18 @@
         clouds: null,
         rail: null,
         isActive: true,
-        error: null
+        error: null,
+        inputLat: '',
+        inputLon: ''
       }
     },
 
     computed: {
+      isDisabled() {
+        if (this.inputLat != '' && this.inputLon != '') {
+          return false
+        } else return true
+      },
       classObject: function () {
         return {
           'is-active': this.isActive && !this.error,
@@ -308,10 +315,12 @@
             this.clouds = response.data.clouds.all
             this.rail = parseFloat(JSON.parse(localStorage.getItem('current_weather')).main.rail)
             //console.log(localStorage.getItem('current_lat'),localStorage.getItem('current_lon'))
-             //this.$refs.forecast.weatherForecast_5day3hour()
-             this.$parent.getForecast() 
+            //this.$refs.forecast.weatherForecast_5day3hour()
+            this.$parent.getForecast()
             button_geo.classList.remove('is-loading')
           })
+          .catch(error => {
+          });
 
       },
     }

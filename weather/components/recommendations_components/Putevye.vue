@@ -209,6 +209,9 @@
 
       isSuccessMethod() {
         if (this.selected_2 !== '') {
+          if (localStorage.getItem('fixation_temp') === null) {
+            localStorage.setItem('fixation_temp', 0)
+          }
           let fixationTemp = parseFloat(localStorage.getItem('fixation_temp'))
           let rail_temp = parseFloat((JSON.parse(localStorage.getItem('current_weather'))).main.rail)
           this.valid_temp = parseInt(this.selected_2) + fixationTemp

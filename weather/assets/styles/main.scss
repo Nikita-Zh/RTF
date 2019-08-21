@@ -40,6 +40,37 @@ $navbar-box-shadow-size: 0 5px 0 0;
 
 
 
+::-webkit-scrollbar { /* 1 - скроллбар */
+  width: 8px;
+  height: 4px;
+  background-color: rgb(255, 255, 255);
+  border-left:  solid 1px #e6ecf8;
+}
+
+::-webkit-scrollbar-button { /* 2 - кнопка */
+
+}
+
+::-webkit-scrollbar-track { /* 3 - трек */
+}
+
+::-webkit-scrollbar-track-piece { /* 4 - видимая часть трека */
+}
+
+::-webkit-scrollbar-thumb { /* 5 - ползунок */
+  //border-radius: 4px;
+  background-color: #8b8b8b;
+}
+
+::-webkit-scrollbar-corner { /* 6 - уголок */
+}
+
+::-webkit-resizer { /* 7 - изменение размеров */
+}
+
+
+
+
 .select-1{
   margin: 5px 0;
 }

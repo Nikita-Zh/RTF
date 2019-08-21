@@ -89,7 +89,9 @@
   import Forecast from '@/components/weather_components/Forecast.vue'
   import Modal from '@/components/Modal.vue'
   import axios from 'axios'
-import { timeout } from 'q';
+  import {
+    timeout
+  } from 'q';
 
   const appKey = "315c9f5b55e01a3815512c1958910fb7"
 
@@ -98,7 +100,7 @@ import { timeout } from 'q';
       WeatherByCity,
       WeatherByGeo,
       Forecast,
-      Modal
+      Modal,
     },
 
     data() {
@@ -152,12 +154,12 @@ import { timeout } from 'q';
       }*/
     },
 
-    
+
     mounted: function () {
       this.tabsfunction()
       this.getNumberOfTheDay()
       if (localStorage.getItem('current_weather') !== null) {
-        
+
         let current_weather = JSON.parse(localStorage.getItem('current_weather'))
         try {
           this.cityParams.city = current_weather.city.name

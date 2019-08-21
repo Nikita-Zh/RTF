@@ -1,10 +1,13 @@
 <template>
   <div>
-    <div v-if="!loading" class="notification is-success">
+    <div v-if="loaded" class="notification is-success">
       Прогноз получен!
     </div>
     <div v-if="loading" class="notification is-warning">
       Загрузка...
+    </div>
+    <div v-if="badLoading" class="notification is-danger is-bold ">
+      Не удалось загрузить данные
     </div>
     <!-- <div class="ct-chart " style="width:100%; height:350px;" id="chart1"></div> -->
 
@@ -65,7 +68,7 @@
               </tr>
             </thead>
             <tbody>
-              <tr v-for="(tr, icon) in table_tr">
+              <tr v-for="(tr, icon) in table_tr" @click="test(tr)">
                 <th>{{tr.date_txt}}</th>
                 <th style="padding:0"><img :src="tr.icon_link" width="40px"></th>
                 <th>{{tr.main.rail + '°C'}}</th>
@@ -78,20 +81,44 @@
         </div>
       </div>
     </div>
+
+    <modal v-if="recommendation" @close="recommendation = false">
+      <div slot="header">
+        <h1 class="title">Обслуживание</h1>
+      </div>
+      <div slot="body">
+        <input type="number" class="input" style="margin-bottom:20px;" placeholder="Введите темперауру закрепления">
+        <putevye-works></putevye-works> 
+      </div>
+      <div slot="footer">
+      </div>
+    </modal>
+
   </div>
 </template>
 
 <script>
   import axios from 'axios'
+  import PutevyeWorks from '@/components/recommendations_components/Putevye.vue'
+  import Machine from '@/components/recommendations_components/Machine.vue'
+  import Modal from '@/components/Modal.vue'
   const appKey = "315c9f5b55e01a3815512c1958910fb7"
   var chart = null
   export default {
+    components: {
+      PutevyeWorks,
+      Machine,
+      Modal,
+    },
 
     data() {
       return {
         successRequest: false,
+        loaded: false,
         loading: false,
         table_tr: [],
+        badLoading: false,
+        recommendation: false
       }
     },
     props: ['title', 'props_table_tr'],
@@ -102,43 +129,9 @@
       //this.chartistJS()
     },
     methods: {
-      chartistJS(data) {
-        /*let dates = []
-        let rail_temp = []
-        let temp = []
-        console.log(data)
-        for (let i = 0; i < 10; i++) {
-          dates.push(data[i].date_txt_chart)
-          rail_temp.push(data[i].main.rail)
-          temp.push(data[i].main.temp)
-        }
-        var chart = new Chartist.Line('.ct-chart', {
-          labels: dates,
-          series: [
-            rail_temp, temp
-          ]
-        }, {
-
-          showArea: true,
-          showPoint: true,
-          fullWidth: false,
-        })
-
-
-
-        /*chart.on('draw', function (data) {
-          if (data.type === 'line' || data.type === 'area') {
-            data.element.animate({
-              d: {
-                begin: 1000 * data.index,
-                dur: 1000,
-                from: data.path.clone().scale(1, 0).translate(0, data.chartRect.height()).stringify(),
-                to: data.path.clone().stringify(),
-                easing: Chartist.Svg.Easing.easeOutQuint
-              }
-            });
-          }
-        });*/
+      test(data) {
+        alert(data.main.rail)
+        this.recommendation = true
       },
       chartJS(data) {
         let dates = []
@@ -186,6 +179,8 @@
 
       weatherForecast_5day3hour() {
         let id = (JSON.parse(localStorage.getItem('current_weather'))).city.id
+        this.badLoading = false;
+        this.loaded = false;
         this.loading = true
         //button.classList.add('is-loading')
         axios.get(`https://api.openweathermap.org/data/2.5/forecast?id=` + id + "&appid=" + appKey)
@@ -195,7 +190,16 @@
             //button.classList.remove('is-loading')
             this.successRequest = true;
             this.loading = false;
+            this.badLoading = false;
+            this.loaded = true;
           })
+          .catch(error => {
+            console.log(error.response)
+            alert(123)
+            this.loading = false;
+            this.loaded = false;
+            this.badLoading = true
+          });
       },
 
       forecast_calcSinH() {

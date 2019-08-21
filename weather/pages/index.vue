@@ -1,32 +1,56 @@
 <template>
   <div>
-    <div class="container wrapper">
-      <h1 class="red">Hello!</h1>
+    <div class="wrapper_index">
+      <section class="hero is-white is-medium">
+        <div class="hero-body">
+          <div class="container">
+            <h1 class="title has-text-centered">
+              Расчет температуры рельсов
+            </h1>
+            <h2 class="subtitle has-text-centered">
+              Large subtitle
+            </h2>
+            <div class="subtitle has-text-centered">
+            <nuxt-link class="button is-warning" to="weather">Прогноз</nuxt-link>
+            </div>
+          </div>
+        </div>
+      </section>
+      <section class="hero is-primary is-bold is-medium">
+        <div class="hero-body">
+          <div class="container">
+            <h1 class="title has-text-centered">
+              Расчет температуры рельсов
+            </h1>
+            <h2 class="subtitle has-text-centered">
+              Large subtitle
+            </h2>
+            <div class="subtitle has-text-centered">
+            <nuxt-link class="button is-warning" to="weather">Прогноз</nuxt-link>
+            </div>
+          </div>
+        </div>
+      </section>
     </div>
   </div>
 </template>
 
 <script>
-  import NavBar from '@/components/NavBar.vue'
-
   export default {
     components: {
-      NavBar
+
     },
 
     data() {
-      return {
-      }
+      return {}
     },
   }
 
 </script>
 
 <style>
-
-  .red {
-    color: red;
-  }
-
+.wrapper_index{
+  padding: 64px 0;
+}
 
 </style>
