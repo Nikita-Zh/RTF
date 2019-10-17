@@ -118,6 +118,7 @@
               let dayDate = parseInt(localStorage.getItem('current_numberOfTheDay'))
               let lat = parseFloat(response.data.coord.lat)
               let CoefAtm = parseFloat(localStorage.getItem('CoefAtm'))
+              let CoefAtmFact = (0.1361 * Math.sin(2 * Math.PI * (dayDate - 94.73) / 365) + 0.2158) * (1.8342 - 0.0152 * lat)
               let Io = parseInt(localStorage.getItem('Io'))
               let Br = parseInt(localStorage.getItem('Br'))
               let Hr = parseInt(localStorage.getItem('Hr'))
@@ -224,7 +225,7 @@
                 let sunHight = Math.asin(sinH) * 180 / Math.PI //высота солнца
                 //console.log('sunHight', sunHight)
 
-                let Sort = Io * sinH / (sinH + CoefAtm)
+                let Sort = Io * sinH / (sinH + CoefAtmFact)
                 //console.log('Sort', Sort)
 
                 let Sgor = Sort * sinH

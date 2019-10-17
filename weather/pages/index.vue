@@ -16,14 +16,14 @@
           </div>
         </div>
       </section>
-      <section class="hero is-primary is-bold is-medium">
+      <section class="hero is-primary is-bold is-medium is-custom-back">
         <div class="hero-body">
           <div class="container">
             <h1 class="title has-text-centered">
               Расчет температуры рельсов
             </h1>
             <h2 class="subtitle has-text-centered">
-              Large subtitle
+              Добро пожаловать на сайт!
             </h2>
             <div class="subtitle has-text-centered">
             <nuxt-link class="button is-warning" to="weather">Прогноз</nuxt-link>
@@ -51,6 +51,14 @@
 <style>
 .wrapper_index{
   padding: 64px 0;
+  
 }
+.is-custom-back{
+  background: url(/cust-back.svg) no-repeat;
+  background-size: 100% 100%;
+  width: 100%;
+  height: 100%;
+}
+
 
 </style>

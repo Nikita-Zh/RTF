@@ -9,51 +9,13 @@
     <div v-if="badLoading" class="notification is-danger is-bold ">
       Не удалось загрузить данные
     </div>
-    <!-- <div class="ct-chart " style="width:100%; height:350px;" id="chart1"></div> -->
-
     <div class="tile is-ancestor">
       <div class="tile is-12 is-vertical is-parent">
-
-        <!--  <div class="tile is-child box">
-          <p class="title">Прогноз</p>
-          <p class="subtitle">на 5 дней каждые 3 часа</p>
-          <button id="button" class="button is-primary is-fullwidth"
-            v-on:click="weatherForecast_5day3hour()">Прогноз</button>
-        </div> -->
         <progress v-if="loading" class="progress is-small is-info" max="100"></progress>
 
         <!-- canvas -->
         <canvas id="myChart"></canvas>
         <!-- end canvas -->
-
-        <!-- CHARTIST -->
-
-        <!-- chartist -->
-        <!--  {{ props_table_tr}}
-        <div v-if="successRequest" class="table-container">
-          <table class="table is-fullwidth  is-striped is-hoverable">
-            <thead style="position: sticky;">
-              <tr>
-                <th><abbr title="Date">Дата</abbr></th>
-             
-                <th><abbr title="Rail">Рельс</abbr></th>
-                <th><abbr title="Cloud">Облачность</abbr></th>
-                <th><abbr title="Wind">Температура</abbr></th>
-                <th><abbr title="Temp">Ветер</abbr></th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr v-for="tr in props_table_tr">
-                <th>{{tr.date_txt}}</th>
-              
-                <th>{{tr.main.rail + '°C'}}</th>
-                <td>{{tr.main.clouds + '%'}}</td>
-                <td>{{tr.main.temp + '°C'}}</td>
-                <td>{{tr.main.wind + 'м/с'}}</td>
-              </tr>
-            </tbody>
-          </table>
-        </div>-->
 
         <div v-if="successRequest" class="table-container">
           <table class="table is-fullwidth  is-striped is-hoverable">
@@ -68,7 +30,7 @@
               </tr>
             </thead>
             <tbody>
-              <tr v-for="(tr, icon) in table_tr" @click="test(tr)">
+              <tr v-for="(tr, icon) in table_tr" @click="test(tr)" :key="icon">
                 <th>{{tr.date_txt}}</th>
                 <th style="padding:0"><img :src="tr.icon_link" width="40px"></th>
                 <th>{{tr.main.rail + '°C'}}</th>
@@ -82,13 +44,26 @@
       </div>
     </div>
 
-    <modal v-if="recommendation" @close="recommendation = false">
-      <div slot="header">
-        <h1 class="title">Обслуживание</h1>
+    <modal v-show="recommendation" @close="recommendation = false">
+      <div slot="header" class="modal-card-title">
+        <p>Обслуживание:</p>
       </div>
       <div slot="body">
-        <input type="number" class="input" style="margin-bottom:20px;" placeholder="Введите темперауру закрепления">
-        <putevye-works></putevye-works> 
+        <div style="font-size:1.2rem; margin-bottom:8px;">Температура закрепления: {{current_fixationTemp}}</div>
+        <div style="display:flex">
+          <input type="number" v-model="modal_input_fixation_temp" class="input"
+            style="margin-bottom:20px; margin-right:4px;" placeholder="Введите темперауру закрепления">
+          <button class="button is-primary" @click="setFixationTempByForecastItem">Ok</button>
+        </div>
+        <div class="tabs is-centered is-boxed">
+          <ul>
+            <li @click="tabsToggle(), tabsParams={is4_1:true, is4_2:false}" class="is-active"><a>Текущем содержании
+                бесстыкового пути</a></li>
+            <li @click="tabsToggle(), tabsParams={is4_1:false, is4_2:true}"><a>Работе путевых машин</a></li>
+          </ul>
+        </div>
+        <putevye-works ref="putevye" v-show="tabsParams.is4_1" :propsByForecast="table_item" />
+        <machine ref="machine" v-show="tabsParams.is4_2" :propsByForecast="table_item" />
       </div>
       <div slot="footer">
       </div>
@@ -102,8 +77,10 @@
   import PutevyeWorks from '@/components/recommendations_components/Putevye.vue'
   import Machine from '@/components/recommendations_components/Machine.vue'
   import Modal from '@/components/Modal.vue'
+
   const appKey = "315c9f5b55e01a3815512c1958910fb7"
   var chart = null
+
   export default {
     components: {
       PutevyeWorks,
@@ -118,21 +95,55 @@
         loading: false,
         table_tr: [],
         badLoading: false,
-        recommendation: false
+        recommendation: false,
+        current_fixationTemp: '',
+        table_item: "",
+        tabsParams: {
+          is4_1: true,
+          is4_2: false
+        },
+        modal_input_fixation_temp: ''
       }
     },
-    props: ['title', 'props_table_tr'],
+
+
     mounted: function () {
       if (localStorage.getItem('current_weather') !== null) {
         this.weatherForecast_5day3hour()
       }
-      //this.chartistJS()
+      if (localStorage.getItem('fixation_temp') !== null) {
+        this.current_fixationTemp = localStorage.getItem('fixation_temp')
+      } else {
+        localStorage.setItem('fixation_temp', 0)
+        this.current_fixationTemp = '0'
+      }
+      
+        let tabs = document.querySelectorAll("div.tabs ul li")
+        tabs.forEach(el => {
+          console.log(el)
+          el.addEventListener('click', () => {
+            el.classList.add('is-active')
+          })
+        })
+
     },
     methods: {
-      test(data) {
-        alert(data.main.rail)
-        this.recommendation = true
+      setFixationTempByForecastItem() {
+        localStorage.setItem('fixation_temp', this.modal_input_fixation_temp)
+        this.current_fixationTemp = this.modal_input_fixation_temp
+        this.$refs.putevye.isSuccessMethod()
+        this.$refs.machine.isSuccessMethod()
       },
+
+      tabsToggle() {
+        document.querySelectorAll("div.tabs ul li.is-active")[0].classList.remove('is-active')
+      },
+
+      test(data) {
+        this.recommendation = true;
+        this.table_item = data.main.rail;
+      },
+
       chartJS(data) {
         let dates = []
         let rail_temp = []
@@ -237,6 +248,8 @@
         let sinHDate = (dd, mm, yy, hh, clouds) => {
           let dayDate = numberDayDate(dd, mm, yy)
           let delta = 23.45 * Math.sin((360 * (284 + dayDate) / 365) * Math.PI / 180);
+          let CoefAtmFact = (0.1361 * Math.sin(2 * Math.PI * (dayDate - 94.73) / 365) + 0.2158) * (1.8342 - 0.0152 *
+            lat)
           let k1 = 1.7
           let k2 = 1.7
           if (hh == 12) {
@@ -261,7 +274,7 @@
           let sunHight = Math.asin(sinH) * 180 / Math.PI //высота солнца
           //console.log('sunHight', sunHight)
 
-          let Sort = Io * sinH / (sinH + CoefAtm)
+          let Sort = Io * sinH / (sinH + CoefAtmFact)
           //console.log('Sort', Sort)
 
           let Sgor = Sort * sinH
@@ -297,6 +310,7 @@
 
           return {
             'sunHight': sunHight,
+            'CoefAtmFact': CoefAtmFact,
             'Sort': Sort,
             'Sgor': Sgor,
             'cosQ0': cosQ0,
@@ -437,5 +451,4 @@
       },*/
     }
   }
-
 </script>

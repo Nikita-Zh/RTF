@@ -1,6 +1,27 @@
 <template>
   <div>
-   <transition name="modal">
+    <div class="modal" style="display:flex; height:100vh">
+      <div class="modal-background"></div>
+      <div class="modal-card" style="margin:0">
+        <header class="modal-card-head">
+          <slot name="header">
+            <p class="modal-card-title">Modal title</p>
+          </slot>
+          <button class="delete" aria-label="close" @click="$emit('close')"></button>
+        </header>
+        <section class="modal-card-body">
+          <slot name="body">
+            default body
+          </slot>
+        </section>
+        <footer class="modal-card-foot">
+          <slot name="footer">
+            <button class="button" @click="$emit('close')">Cancel</button>
+          </slot>
+        </footer>
+      </div>
+    </div>
+    <!-- <transition name="modal">
        <div class="modal-mask">
       <div class="modal-wrapper">
         <div class="modal-container">
@@ -32,7 +53,7 @@
         </div>
       </div>
     </div>
-    </transition>
+    </transition> -->
   </div>
 </template>
 <script>
@@ -41,7 +62,6 @@
       return {}
     },
   }
-
 </script>
 <style lang="scss">
   .modal-mask {
@@ -58,12 +78,12 @@
     align-items: center;
     justify-content: center;
     transition: opacity .3s ease;
-    
-    
+
+
   }
 
   .modal-wrapper {
-   // display: table-cell;
+    // display: table-cell;
     vertical-align: middle;
     z-index: 20;
   }
@@ -88,13 +108,13 @@
     margin: 20px 0;
   }
 
-  .modal-exit{
-    position:absolute;
+  .modal-exit {
+    position: absolute;
     top: 15px;
     right: 15px;
     border-radius: 70%;
     color: black;
-    background-color:rgb(151, 151, 151);
+    background-color: rgb(151, 151, 151);
     box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.5);
     display: flex;
     width: 25px;
@@ -105,13 +125,15 @@
     align-items: center;
   }
 
-.modal-exit div:nth-child(1){
+  .modal-exit div:nth-child(1) {
     transform: rotate(45deg);
-}
-.modal-exit div:nth-child(2){
+  }
+
+  .modal-exit div:nth-child(2) {
     transform: rotate(-45deg);
-}
-  .modal-exit-span{
+  }
+
+  .modal-exit-span {
     position: absolute;
     width: 16px;
     height: 1px;
@@ -122,7 +144,7 @@
     float: right;
   }
 
- /* .modal-enter {
+  /* .modal-enter {
     opacity: 0;
   }
 
@@ -135,5 +157,4 @@
     -webkit-transform: scale(1.1);
     transform: scale(1.1);
   }*/
-
 </style>

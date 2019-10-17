@@ -2,43 +2,45 @@
   <div>
     <div class="container wrapper">
       <div class="level">
-          <div class="level-item has-text-centered">
-            <div>
-              <p class="heading">Местоположение</p>
-              <p class="title">{{City}}</p>
-            </div>
-          </div>
-          <div class="level-item has-text-centered">
-            <div>
-              <p class="heading">Рельс</p>
-              <p class="title"> {{cityRailTemp + '°C'}}</p>
-            </div>
-          </div>
-          <div class="level-item has-text-centered">
-            <div>
-              <p class="heading">Температура</p>
-              <p class="title"> {{cityTemp + '°C'}}</p>
-            </div>
-          </div>
-           <div class="level-item has-text-centered">
-            <div>
-              <p class="heading">Выбрать другое</p>
-              <p class="title"><nuxt-link class="button is-dark" to="/weather">Местоположение</nuxt-link></p>
-            </div>
+        <div class="level-item has-text-centered">
+          <div>
+            <p class="heading">Местоположение</p>
+            <p class="title">{{City}}</p>
           </div>
         </div>
+        <div class="level-item has-text-centered">
+          <div>
+            <p class="heading">Рельс</p>
+            <p class="title"> {{cityRailTemp + '°C'}}</p>
+          </div>
+        </div>
+        <div class="level-item has-text-centered">
+          <div>
+            <p class="heading">Температура</p>
+            <p class="title"> {{cityTemp + '°C'}}</p>
+          </div>
+        </div>
+        <div class="level-item has-text-centered">
+          <div>
+            <p class="heading">Выбрать другое</p>
+            <p class="title">
+              <nuxt-link class="button is-dark" to="/weather">Местоположение</nuxt-link>
+            </p>
+          </div>
+        </div>
+      </div>
 
       <div>
         <modal v-if="showModal" @close="showModal = false">
-          <div slot="header">
-            <h1 class="title"> Температура закрепления </h1>
+          <div slot="header" class="modal-card-title">
+            <p>Температура закрепления</p>
           </div>
           <div slot="body">
             <input v-model="inputTemp" class="input " type="number" placeholder="Введите температуру закрепления">
           </div>
           <div slot="footer">
             <button :disabled="isDisabled" class="button is-success  is-fullwidth"
-              @click="showModal = false, setFixationTemp()"><b>Подтвердить</b></button>
+              @click="showModal = false, setFixationTemp()">Подтвердить</button>
           </div>
         </modal>
       </div>
@@ -49,9 +51,10 @@
             <p class="title">1. Температура закрепления</p>
             <p class="content">Заданная температура закрепления: <span class="subtitle">{{current_fixationTemp}}</span>
             </p>
-            <button @click="showModal = true" class="button is-medium is-fullwidth is-info">Задать температуру закрепления</button>
+            <button @click="showModal = true" class="button is-medium is-fullwidth is-info">Задать температуру
+              закрепления</button>
           </div>
-        </div>  
+        </div>
       </div>
 
       <div class="level">
@@ -182,7 +185,6 @@
       }
     }
   }
-
 </script>
 
 <style>
@@ -198,5 +200,4 @@
   .danger {
     border: solid 2px rgb(255, 0, 0);
   }
-
 </style>

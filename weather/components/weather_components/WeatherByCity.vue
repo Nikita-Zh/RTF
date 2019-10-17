@@ -76,7 +76,7 @@
     },
 
     methods: {
-      getForecast(){
+      getForecast() {
         this.$parent.getForecast()
       },
       /*получение списка городов по выбранной стране*/
@@ -131,10 +131,10 @@
       },
 
       showWeaterbyData(data) {
-         console.log(data)
+        console.log(data)
         let coeff = () => {
           let curr_lat = parseFloat(data.city.lat)
-         
+
           //console.log(curr_lat)
           let GeoLat = [0, 10, 20, 30, 40, 50, 60, 70, 75, 80, 85]
           let ArrCoeffA = [0.38, 0.40, 0.37, 0.36, 0.38, 0.40, 0.36, 0.18, 0.16, 0.15, 0.14]
@@ -170,6 +170,8 @@
           let dayDate = parseInt(localStorage.getItem('current_numberOfTheDay'))
           let lat = parseFloat(data.city.lat)
           let CoefAtm = parseFloat(localStorage.getItem('CoefAtm'))
+          let CoefAtmFact = (0.1361 * Math.sin(2 * Math.PI * (dayDate - 94.73) / 365) + 0.2158) * (1.8342 - 0.0152 * lat)
+          console.log('CoefAtmFact',CoefAtmFact)
           let Io = parseInt(localStorage.getItem('Io'))
           let Br = parseInt(localStorage.getItem('Br'))
           let Hr = parseInt(localStorage.getItem('Hr'))
@@ -237,7 +239,7 @@
               CUR_S90 = sinHDate(dayDate, hh)
               MAX_S90 = Math.max(CUR_S90, MAX_S90)
             }
-             console.log("MAX_S90",MAX_S90)
+            console.log("MAX_S90", MAX_S90)
             localStorage.setItem('max_s90_365', MAX_S90)
             return MAX_S90
           }
@@ -276,7 +278,7 @@
             let sunHight = Math.asin(sinH) * 180 / Math.PI //высота солнца
             //console.log('sunHight', sunHight)
 
-            let Sort = Io * sinH / (sinH + CoefAtm)
+            let Sort = Io * sinH / (sinH + CoefAtmFact)
             //console.log('Sort', Sort)
 
             let Sgor = Sort * sinH
@@ -328,10 +330,10 @@
 
           let date = new Date(data.dt * 1000)
           let timezone = data.timezone / 3600
-  
+
           let hh = date.getHours() + (date.getTimezoneOffset() / 60) + timezone
 
-           console.log('hh', hh)
+          console.log('hh', hh)
           let coefficients = sinHDate(hh)
 
           console.log(coefficients)
@@ -618,7 +620,6 @@
       },
     }
   }
-
 </script>
 <style>
   .tile {
@@ -678,5 +679,4 @@
   .hidden {
     display: none;
   }
-
 </style>

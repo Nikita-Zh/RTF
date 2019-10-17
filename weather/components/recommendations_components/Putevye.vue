@@ -184,6 +184,10 @@
 
     },
 
+    props: {
+      propsByForecast: String
+    },
+
     computed: {
       isSelected() {
         for (let i in this.names) {
@@ -201,6 +205,7 @@
       }
 
     },
+    
     methods: {
       test() {
         this.selected_2 = ''
@@ -212,8 +217,15 @@
           if (localStorage.getItem('fixation_temp') === null) {
             localStorage.setItem('fixation_temp', 0)
           }
+          let rail_temp = 0
+          if (typeof this.propsByForecast !== 'undefined') {
+            rail_temp = parseFloat(this.propsByForecast)
+            console.log('current_rail', rail_temp)
+          } else {
+            rail_temp = parseFloat((JSON.parse(localStorage.getItem('current_weather'))).main.rail)
+            console.log('standart_rail', rail_temp)
+          }
           let fixationTemp = parseFloat(localStorage.getItem('fixation_temp'))
-          let rail_temp = parseFloat((JSON.parse(localStorage.getItem('current_weather'))).main.rail)
           this.valid_temp = parseInt(this.selected_2) + fixationTemp
           if (this.valid_temp >= rail_temp) {
             this.isFailResult = false
@@ -245,7 +257,6 @@
     }
 
   }
-
 </script>
 
 <style>
@@ -253,5 +264,4 @@
     color: #bbbbbb;
     font-weight: 100;
   }
-
 </style>
