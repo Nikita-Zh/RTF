@@ -24,6 +24,7 @@
               <div class="navbar-item yo" v-on:click="remove_active"><nuxt-link  class="navbar-item nuxt-link" to="/"> Главная</nuxt-link></div>
               <div class="navbar-item yo" v-on:click="remove_active"><nuxt-link  class="navbar-item nuxt-link" to="/weather"> Погода</nuxt-link></div>
               <div class="navbar-item yo" v-on:click="remove_active"><nuxt-link  class="navbar-item nuxt-link" to="/recommendations">Обслуживание пути</nuxt-link></div>
+              <div class="navbar-item yo" v-on:click="remove_active"><nuxt-link  class="navbar-item nuxt-link" to="/documentation">Нормативная документация</nuxt-link></div>
             </div>
           </div>
         </div>

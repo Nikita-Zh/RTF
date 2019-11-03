@@ -49,7 +49,7 @@
               </div>
             </div>
             <div class="c-card-footer">
-              <nuxt-link class="button is-medium is-fullwidth is-dark" to="">Подробнее</nuxt-link>
+              <nuxt-link class="button is-medium is-fullwidth is-dark" to="documentation">Подробнее</nuxt-link>
             </div>
           </div>
 
