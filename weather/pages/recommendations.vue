@@ -79,39 +79,6 @@
           <machine v-show="tabsParams.is4_2" ref="machine"></machine>
         </transition>
       </keep-alive>
-
-      <!--  
-       <div class="tile is-ancestor">
-        <div class="tile is-vertical is-parent">
-          <div class="tile is-child box">
-         <putevye-works></putevye-works>
-          </div>
-          <div class="tile is-child box">
-          <machine />
-          </div>
-        </div>
-      </div>
-      -->
-
-      <!--  
-      <div class="tile is-ancestor">
-        <div class="tile is-vertical is-parent">
-          <div class="tile is-child box danger">
-            <p class="title">1. Температура закрепления</p>
-            <p class="content">Заданная температура закрепления: <span class="subtitle">{{current_fixationTemp}}</span>
-            </p>
-            
-          </div>
-        </div>
-      </div>
-
-      <success-result v-if="isSuccessResult"></success-result>
-      <fail-result v-if="isFailResult">
-        <div slot="body">
-          Ближайшая допустимая дата для проведения работ: {{nearest_valid_date}}
-        </div>
-      </fail-result>-->
-
     </div>
 
   </div>

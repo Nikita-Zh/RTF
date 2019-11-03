@@ -644,7 +644,8 @@
     overflow: auto;
     padding: 5px 0;
     margin: 20px 0 0 0;
-    box-shadow: inset 0 1px 2px rgba(10, 10, 10, 0.1);
+    /*box-shadow: inset 0 1px 2px rgba(10, 10, 10, 0.1);*/
+    box-shadow: inset 0px -5px 6px rgb(239, 239, 239);
     border: solid 1px;
     border-radius: 4px;
     border-color: #dbdbdb;

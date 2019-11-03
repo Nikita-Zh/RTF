@@ -23,17 +23,8 @@
             <div class="navbar-end">
               <div class="navbar-item yo" v-on:click="remove_active"><nuxt-link  class="navbar-item nuxt-link" to="/"> Главная</nuxt-link></div>
               <div class="navbar-item yo" v-on:click="remove_active"><nuxt-link  class="navbar-item nuxt-link" to="/weather"> Погода</nuxt-link></div>
-              <div class="navbar-item yo" v-on:click="remove_active"><nuxt-link  class="navbar-item nuxt-link" to="/weather_test"> Тест</nuxt-link></div>
-              <div class="navbar-item yo" v-on:click="remove_active"><nuxt-link  class="navbar-item nuxt-link" to="/computed"> Computed</nuxt-link></div>
               <div class="navbar-item yo" v-on:click="remove_active"><nuxt-link  class="navbar-item nuxt-link" to="/recommendations">Обслуживание пути</nuxt-link></div>
             </div>
-            <!--  <div class="navbar-end">
-              <nuxt-link role="button" v-on:click="remove_active" class="navbar-item" to="/"> Главная</nuxt-link>
-              <nuxt-link role="button" v-on:click="remove_active" class="navbar-item" to="/weather"> Погода</nuxt-link>
-              <nuxt-link role="button" v-on:click="remove_active" class="navbar-item" to="/weather_test"> Тест</nuxt-link>
-              <nuxt-link role="button" v-on:click="remove_active" class="navbar-item" to="/computed"> Computed</nuxt-link>
-              <nuxt-link role="button" v-on:click="remove_active" class="navbar-item" to="/recommendations">Обслуживание пути</nuxt-link>
-            </div>-->
           </div>
         </div>
       </nav>
