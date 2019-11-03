@@ -9,7 +9,8 @@
     "build": "nuxt build",
     "start": "nuxt start",
     "generate": "nuxt generate",
-    "heroku-prebuild": "npm run build"
+    "heroku-prebuild": "npm run build",
+    "heroku-postbuild": "npm run build"
   },
   "dependencies": {
     "@nuxtjs/bulma": "^1.2.1",
