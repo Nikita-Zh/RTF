@@ -24,7 +24,7 @@
           <div class="c-card">
             <div class="c-card-content">
               <div class="c-card-title title">Прогноз</div>
-              <div class="c-card-text subtitle"> Просмотреть текщие погодныне условия и прогноз на 5 ближайшие дней
+              <div class="c-card-text subtitle"> Просмотреть текщие погодные условия и прогноз на 5 ближайшие дней
               </div>
             </div>
             <div class="c-card-footer">
@@ -45,7 +45,7 @@
           <div class="c-card">
             <div class="c-card-content">
               <div class="c-card-title title">Нормативная документация</div>
-              <div class="c-card-text subtitle"> Просмотреть текщие погодныне условия и прогноз на 5 ближайшие дней
+              <div class="c-card-text subtitle">
               </div>
             </div>
             <div class="c-card-footer">
