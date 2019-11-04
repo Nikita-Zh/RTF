@@ -206,7 +206,7 @@
           })
           .catch(error => {
             console.log(error.response)
-            alert(123)
+            //alert(123)
             this.loading = false;
             this.loaded = false;
             this.badLoading = true
