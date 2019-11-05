@@ -344,13 +344,6 @@
 
 
           let date = new Date((dataDays.list[item].dt + current_timezone + timezone) * 1000)
-          /*console.log(new Date(dataDays.list[item].dt * 1000))
-          console.log(date)
-          console.log(date.getDate())
-          console.log(date.getMonth() + 1)
-          console.log(date.getFullYear())
-          console.log(date.getHours())*/
-          //let timezone = dataDays.city.timezone / 3600
           let dd = date.getDate()
           let mm = date.getMonth() + 1
           let yy = date.getFullYear()
@@ -376,79 +369,8 @@
         //console.log(myObject)
         this.table_tr = myObject.list
         localStorage.setItem('data_5/3', JSON.stringify(myObject))
-        //myChart.update()
         this.chartJS(myObject.list)
-        //this.chartistJS(myObject.list)
       },
-
-      /*SMax365() {
-        let lat = parseFloat(JSON.parse(localStorage.getItem('current_weather')).city.lat)
-        let CoefAtm = parseFloat(localStorage.getItem('CoefAtm'))
-        let Io = parseInt(localStorage.getItem('Io'))
-        let Br = parseInt(localStorage.getItem('Br'))
-        let Hr = parseInt(localStorage.getItem('Hr'))
-
-        let tauDate = (hour) => {
-          let difference = 12 - hour
-          let degree = difference * 15
-          //console.log(degree)
-          return (degree)
-        };
-
-        let sinHDate = (dayDate, hh) => {
-          let delta = 23.45 * Math.sin((360 * (284 + dayDate) / 365) * Math.PI / 180);
-          let k1 = 1.7
-          let k2 = 1.7
-          if (hh == 12) {
-            k1 = 2
-          }
-
-          let tau = tauDate(hh)
-
-          let sinH = Math.sin(lat * Math.PI / 180) *
-            Math.sin(delta * Math.PI / 180) +
-            Math.cos(lat * Math.PI / 180) *
-            Math.cos(delta * Math.PI / 180) *
-            Math.cos(tau * Math.PI / 180);
-
-
-          if (sinH < 0) {
-            sinH = 0
-          }
-
-          let sunHight = Math.asin(sinH) * 180 / Math.PI //высота солнца
-
-          let Sort = Io * sinH / (sinH + CoefAtm)
-
-          let Sgor = Sort * sinH
-
-          let cosQ0 = Math.cos(sunHight * Math.PI / 180) * Math.abs(Math.sin((180 - tau) * Math.PI / 180))
-
-          let cosQ90 = Math.cos(sunHight * Math.PI / 180) * Math.abs(Math.sin((180 - tau - 90) * Math.PI / 180))
-
-          let S0ver = Sort * cosQ0
-
-          let S90ver = Sort * cosQ90
-
-          let S0 = k1 * (Sgor * Br + S0ver * Hr) / 2000
-
-          let S90 = k2 * (Sgor * Br + S90ver * Hr) / 2000
-
-          let S = 0.5 * (S0 + S90)
-          return S90
-        }
-
-        let MAX_S90 = 0
-        let CUR_S90 = 0
-        for (let i = 1; i <= 365; i++) {
-          let dayDate = i
-          let hh = 12
-          CUR_S90 = sinHDate(dayDate, hh)
-          MAX_S90 = Math.max(CUR_S90, MAX_S90)
-        }
-        console.log(MAX_S90)
-        localStorage.setItem('max_s90_365', MAX_S90)
-      },*/
     }
   }
 </script>

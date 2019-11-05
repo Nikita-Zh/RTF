@@ -135,22 +135,6 @@
     },
 
     computed: {
-      /*isNotUpdated() {
-        if (localStorage.getItem('data_5/3') !== null) {
-          let curr_city = (JSON.parse(localStorage.getItem('current_weather'))).city.id
-          let forecast_city = (JSON.parse(localStorage.getItem('data_5/3'))).city.id
-          if (curr_city == forecast_city) {
-            console.log('true!')
-            return true
-          } else {
-            console.log('wrong')
-            return false
-          }
-        } else {
-            console.log('wrong')
-            return false
-        }
-      }*/
     },
 
 
@@ -218,7 +202,7 @@
           }
           if (this.inputWind != '') data.main.wind = this.inputWind;
           localStorage.setItem('current_weather', JSON.stringify(data))
-          this.$refs.byCity.showWeaterbyData(data)
+          this.$refs.byCity.showWeatherbyData(data)
         }
 
       },

@@ -45,7 +45,7 @@
           <div class="c-card">
             <div class="c-card-content">
               <div class="c-card-title title">Нормативная документация</div>
-              <div class="c-card-text subtitle">
+              <div class="c-card-text subtitle">  
               </div>
             </div>
             <div class="c-card-footer">

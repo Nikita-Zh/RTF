@@ -6,7 +6,7 @@
         <input v-model="inputLat" class="input input-geo" id="lat_" type="text" placeholder="Широта">
         <input v-model="inputLon" class="input input-geo" id="lon_" type="text" placeholder="Долгота">
         <button :disabled="isDisabled" id="button_geo" class="button is-primary is-medium is-fullwidth"
-          v-on:click="showWeaterByGeoCoordinates">Отправить</button>
+          v-on:click="showWeatherByGeoCoordinates">Отправить</button>
       </div>
       <!-- <forecast ref="forecast"></forecast> -->
     </div>
@@ -65,7 +65,7 @@
 
     methods: {
       /*погода по координатам*/
-      showWeaterByGeoCoordinates(id) {
+      showWeatherByGeoCoordinates(id) {
         button_geo.classList.add('is-loading')
         //https://api.openweathermap.org/data/2.5/weather?lat=56.732958&lon=37.529302&appid=315c9f5b55e01a3815512c1958910fb7
         axios.get(`https://api.openweathermap.org/data/2.5/weather?lat=` + lat_.value + "&lon=" + lon_.value +
