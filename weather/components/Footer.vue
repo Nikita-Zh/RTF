@@ -2,7 +2,7 @@
   <footer class="footer">
     <div class="content has-text-centered">
       <p>
-        <strong>Weather</strong> by <a href="">fnmn</a>.
+        2019 Расчёт температуры рельсов <a href=""></a>
       </p>
     </div>
   </footer>
